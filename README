@@ -1,0 +1,53 @@
+
+This README contains a summary of each class file, and also a brief discussion about how to build the Java code.
+
+Note: These class's are written in Java.  To be able to run this code, please do the following steps:
+1. Install a JDK (This code was written using JDK 1.7.0_45, so please use this version or a later version).
+2. Ensure that the "javac" and "java" executables ("javac.exe" and "java.exe" if run on Windows) are in your shell's Path variable.
+3. Place all the Java files into the same directory.
+4. Run the command "javac *.java" ("javac.exe *.java if on Windows).  This compiles the Java source code into bytecode (.class files), which may be interpreted by the Java Virtual Machine (JVM).
+5. To run the test program (FlashNotesTestMain.java) that utilizes this code,
+   run the command (from the directory containing all the .class files):
+   "java FlashNotesTestMain" ("java.exe FlashNotesTestMain" if on Windows).
+6. You can write any other Java code you wish that utilizes these classes as long as this code imports these classes.  Also, you will need to ensure that the .class files (produced in step 4) are located in the Java classpath of the JVM you are running that uses this code.
+
+
+FlashNotesTestMain.java
+- This class is a tester of the code.  It simply creates a TaskQueue, and
+  adds 2 "Ping" command Tasks to that queue, and executes them.  It then
+  displays the results of each Task to the standard output.
+
+Task.java
+- This class represents a Task to be run.  When a Task is newly created,
+  its corresponding TaskResult is added to the TaskResults container,
+  with a status of "Ready".  This is because the Task has not run yet,
+  but is ready to be started.  When the execute() method of the Task
+  has been run, the corresponding status will be updated in the TaskResults
+  container to "Pending" as the Task has begun but not yet completed.
+  Once the final results of the Task are known, this corresponding status
+  will be updated to "Complete".
+
+TaskQueue.java
+- This class is a FIFO queue of Tasks.  Its methods provide a standard
+  queue-type interface.
+
+TaskResult.java
+- This class represents the result of a Task.  As discussed for Task.java
+  above, it stores the status of a Task, but also many other properties
+  of the result, such as the Task's exit code, the GUID of the Task, and
+  the standard output of the Task's process.
+
+TaskResults.java
+- This class is the container for the TaskResult objects.  It stores
+  these in a map data structure so that each TaskResult may be keyed off
+  of the GUID of the corresponding Task.  This allows for the easy lookup
+  of a given Task's status by simply providing its GUID.
+
+
+
+
+
+
+
+
+ 
